@@ -3,23 +3,29 @@
 ## Project Overview
 In this project, I assume the role of a Business Intelligence (BI) consultant hired by the fictional company Maven Toys. As the company prepares to expand its retail footprint by opening new stores, they’ve engaged me to uncover patterns and trends within their historical sales, inventory, products, and store data. The objective is to deliver actionable insights that will inform their expansion strategy, inventory planning, and overall business decisions.
 
-## Project Workflow
-1. Database Setup
-2. Data Import
-3. Data Cleaning
-4. Business Problem Solving
-
 ## About the dataset
 
 The dataset provided contains 4 tables in CSV format:
 
-1. The Products table contains the 35 products sold at Maven Toys (each record represents one product), with fields containing details about the product category, cost, and retail price.
-2. The Stores table contains the 50 Maven Toys store locations (each record represents one store), with fields containing details about the store location, type, and date it opened.
-3. The sales table contains the units sold in over 800,000 sales transactions (each record represents the purchase of a specific product at a specific store on a specific date).
+1. The Products table contains the 35 unique products sold at Maven Toys,  with fields containing details about the product category, cost, and retail price.
+2. The Stores table contains the 50 Maven Toys stores, with fields containing details about the store location, type, and date it opened.
+3. The sales table contains the units sold in over 800,000 sales transactions, each record represents the purchase of a specific product at a specific store on a specific date.
 4. The inventory table contains over 1,500 records that represent the stock on hand of each product in each store at the current point in time.
+
+## Project Workflow
+1. Database Setup
+2. Data Import
+3. Data Cleaning
+4. Data Analysis
 
 ### Database Setup
 I created a database for the company and four tables.
+
+``` sql
+
+CREATE DATABSE maven_toys;
+
+```
 
 ``` sql
 DROP TABLE IF EXISTS sales;
@@ -34,13 +40,13 @@ CREATE TABLE sales(
 );
 ```
 
-
-``` sql
-
-```
 ### Data Import
 
-I imported raw CSV data into respective created database tables using the wizard in pgAdmin.
+I imported the raw CSV data into the respective database tables using the import wizard feature in pgAdmin.
+
+### Data Model (ERD)
+
+![Database Schema Model](https://github.com/user-attachments/assets/fea320c8-08bf-4639-bbbc-54b6e53b9c39)
 
 ### Data Cleaning
 
@@ -86,13 +92,13 @@ SELECT year, revenue,
 FROM yearly_rev;
 ```
 
-| Year | Revenue    | Growth Ratio |
-|:------|:------------|:----------------|
-| 2022 | 7,482,498.08 | —              |
-| 2023 | 6,962,074.27 | -6.96%         |
+| Year | Revenue      | Growth Ratio |
+|:------|:------------|:-------------|
+| 2022 | 7,482,498.08 | —            |
+| 2023 | 6,962,074.27 | -6.96%       |
 
 ```sql
--- Q.8 Which product categories contribute the most to sales revenue across different stores?  
+-- Which product categories contribute the most to sales revenue across different stores?  
 
 WITH revenue_cte AS (
 	SELECT st.store_name, p.product_name, ROUND(SUM(p.product_price * s.units)::NUMERIC, 2) AS revenue, 
@@ -111,15 +117,43 @@ FROM revenue_cte
 WHERE rank = 1;
 ```
 
-<div style="max-height: 250px; overflow-y: auto;">
-
 | Store Name                  | Product Name      | Revenue   |
-|:---------------------------|:-----------------|:----------|
+|:----------------------------|:------------------|:----------|
 | Maven Toys Aguascalientes 1 | Lego Bricks       | 40829.79  |
 | Maven Toys Campeche 1       | Mini Ping Pong Set| 42397.56  |
 | Maven Toys Campeche 2       | Lego Bricks       | 25673.58  |
 | Maven Toys Chetumal 1       | Lego Bricks       | 52306.92  |
 | Maven Toys Chihuahua 1      | Lego Bricks       | 44308.92  |
-| *...scroll for more...*     |                   |           |
 
-</div>
+*To keep this README concise, I’ve displayed results for just 5 stores. The query generates results for all 50 stores.*
+
+```sql
+
+-- Which stores experience the most frequent product stockouts? 
+
+WITH stockout_cte AS (
+	SELECT store_name, 
+	COUNT(CASE WHEN stock_on_hand = 0 THEN 1 END) AS stockout_count
+	FROM stores st
+	JOIN inventory i
+		ON st.store_id = i.store_id
+	GROUP BY store_name
+	ORDER BY stockout_count DESC
+	)
+	
+SELECT store_name, stockout_count
+FROM stockout_cte
+WHERE stockout_count != 0;
+```
+
+| Store Name                 | Stockout Count |
+|:---------------------------|:---------------|
+| Maven Toys Mexicali 2      | 5              |
+| Maven Toys La Paz 1        | 5              |
+| Maven Toys Hermosillo 2    | 4              |
+| Maven Toys Pachuca 1       | 4              |
+| Maven Toys Aguascalientes 1| 4              | 
+
+*Just like the previous result, this is only a preview. The full query returns 35 rows.*
+
+ 
