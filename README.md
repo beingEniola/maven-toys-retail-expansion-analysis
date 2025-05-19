@@ -97,82 +97,23 @@ FROM yearly_rev;
 | 2022 | 7,482,498.08 | —            |
 | 2023 | 6,962,074.27 | -6.96%       |
 
-```sql
--- Which product categories contribute the most to sales revenue across different stores?  
 
-WITH revenue_cte AS (
-	SELECT st.store_name, p.product_name, ROUND(SUM(p.product_price * s.units)::NUMERIC, 2) AS revenue, 
-	RANK() OVER(PARTITION BY st.store_name ORDER BY SUM(p.product_price * s.units) DESC) AS rank
-	FROM stores st
-	JOIN sales s
-		ON st.store_id = s.store_id
-	JOIN products p
-		ON s.product_id = p.product_id
-	GROUP BY st.store_name, p.product_name
-	ORDER BY st.store_name, revenue DESC
-	)
-	
-SELECT store_name, product_name, revenue
-FROM revenue_cte
-WHERE rank = 1;
-```
+For a detailed walkthrough of the business questions, SQL solutions, insights, and recommendations from this project, check out the full write-up on [Medium](). Th
 
-| Store Name                  | Product Name      | Revenue   |
-|:----------------------------|:------------------|:----------|
-| Maven Toys Aguascalientes 1 | Lego Bricks       | 40829.79  |
-| Maven Toys Campeche 1       | Mini Ping Pong Set| 42397.56  |
-| Maven Toys Campeche 2       | Lego Bricks       | 25673.58  |
-| Maven Toys Chetumal 1       | Lego Bricks       | 52306.92  |
-| Maven Toys Chihuahua 1      | Lego Bricks       | 44308.92  |
-
-*To keep this README concise, I’ve displayed results for just 5 stores. The query generates results for all 50 stores.*
-
-```sql
-
--- Which stores experience the most frequent product stockouts? 
-
-WITH stockout_cte AS (
-	SELECT store_name, 
-	COUNT(CASE WHEN stock_on_hand = 0 THEN 1 END) AS stockout_count
-	FROM stores st
-	JOIN inventory i
-		ON st.store_id = i.store_id
-	GROUP BY store_name
-	ORDER BY stockout_count DESC
-	)
-	
-SELECT store_name, stockout_count
-FROM stockout_cte
-WHERE stockout_count != 0;
-```
-
-| Store Name                 | Stockout Count |
-|:---------------------------|:---------------|
-| Maven Toys Mexicali 2      | 5              |
-| Maven Toys La Paz 1        | 5              |
-| Maven Toys Hermosillo 2    | 4              |
-| Maven Toys Pachuca 1       | 4              |
-| Maven Toys Aguascalientes 1| 4              | 
-
-*Just like the previous result, this is only a preview. The full query returns 35 rows.*
-
-For a detailed workthrouhgh of my analysis , it is in my github article and the sql file .
-
-### Insights 
+## Insights 
 
 1. Ciudad de Mexico 2 is the top-performing store, generating significantly higher revenue than the others. This store is a good model for new locations.
 2. Lego Bricks is a consistent top selling product across all stores
-3. 
+3. Even though revenue fell by 6% in 2023, Downtown stores still made the most money. Their performance stayed more stable than other store types, which saw drops between 2% and 11%. This makes Downtown areas a strong option for opening new stores
 4. Cities like Ciudad de Mexico , Guadalajara, and Monterrey topped in revenue and achieved a profit margin of almost 30%.
 5. Fast selling products are  'Action Figure' and 'Colorbuds'.
 6. Campeche 2, La Paz 1, and 30 other stores are currently generating sales lower than the average.
 
-### Recommendations
+## Recommendations
 
 1. Prioritize opening new stores in Downtown areas due to their strong and stable revenue performance despite the market decline..
 Model new store operations after top performers like Ciudad de Mexico 2, specifically analyzing and replicating their inventory mix, pricing, and customer engagement strategies.
 2. Increase inventory and promotions in December, especially for Mall and Urban stores, to leverage the annual sales peak.
 3. Ensure consistent stock availability for high-performing products such as Lego Bricks, Colorbuds, and Action Figures to maximize revenue and customer satisfaction.
 4. Improve inventory monitoring and restocking to solve the stockout issues at stores like La Paz 1, Hermosillo 2, and Pachuca 1.
-5. Review and improve how stores like Campeche 2 and La Paz 1 are doing, along with other below-average locations, to find out what's wrong or how we can make them better.
- 
+5. Review how stores like Campeche 2 and La Paz 1 are doing, along with other below-average locations, to find out what's wrong or how they can be improved.
