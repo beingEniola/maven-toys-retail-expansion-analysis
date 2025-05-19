@@ -156,4 +156,23 @@ WHERE stockout_count != 0;
 
 *Just like the previous result, this is only a preview. The full query returns 35 rows.*
 
+For a detailed workthrouhgh of my analysis , it is in my github article and the sql file .
+
+### Insights 
+
+1. Ciudad de Mexico 2 is the top-performing store, generating significantly higher revenue than the others. This store is a good model for new locations.
+2. Lego Bricks is a consistent top selling product across all stores
+3. 
+4. Cities like Ciudad de Mexico , Guadalajara, and Monterrey topped in revenue and achieved a profit margin of almost 30%.
+5. Fast selling products are  'Action Figure' and 'Colorbuds'.
+6. Campeche 2, La Paz 1, and 30 other stores are currently generating sales lower than the average.
+
+### Recommendations
+
+1. Prioritize opening new stores in Downtown areas due to their strong and stable revenue performance despite the market decline..
+Model new store operations after top performers like Ciudad de Mexico 2, specifically analyzing and replicating their inventory mix, pricing, and customer engagement strategies.
+2. Increase inventory and promotions in December, especially for Mall and Urban stores, to leverage the annual sales peak.
+3. Ensure consistent stock availability for high-performing products such as Lego Bricks, Colorbuds, and Action Figures to maximize revenue and customer satisfaction.
+4. Improve inventory monitoring and restocking to solve the stockout issues at stores like La Paz 1, Hermosillo 2, and Pachuca 1.
+5. Review and improve how stores like Campeche 2 and La Paz 1 are doing, along with other below-average locations, to find out what's wrong or how we can make them better.
  
