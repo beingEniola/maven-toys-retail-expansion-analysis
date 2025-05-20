@@ -110,14 +110,14 @@ For a detailed walkthrough of the business questions, SQL solutions, insights, a
 2. Lego Bricks is a consistent top selling product across all stores
 3. Even though revenue fell by 6% in 2023, Downtown stores still made the most money. Their performance stayed more stable than other store types, which saw drops between 2% and 11%. This makes Downtown areas a strong option for opening new stores
 4. Cities like Ciudad de Mexico , Guadalajara, and Monterrey topped in revenue and achieved a profit margin of almost 30%.
-5. Fast selling products are  'Action Figure' and 'Colorbuds'.
+5. Fast selling products are Action Figure and Colorbuds.
 6. Campeche 2, La Paz 1, and 30 other stores are currently generating sales lower than the average.
 
 ## Recommendations
 
-1. Prioritize opening new stores in Downtown areas due to their strong and stable revenue performance despite the market decline.
+1. Prioritize opening new stores in Downtown areas due to their strong and stable revenue performance.
 2. Model new store operations after top performers like Ciudad de Mexico 2, specifically analyzing and replicating their inventory mix, pricing, and customer engagement strategies.
-3. Increase inventory and promotions in December, especially for Mall and Urban stores, to leverage the annual sales peak.
+3. Increase inventory and promotions in December, especially for Downtown and Commercial stores, to leverage the annual sales peak.
 4. Ensure consistent stock availability for high-performing products such as Lego Bricks, Colorbuds, and Action Figures to maximize revenue and customer satisfaction.
 5. Improve inventory monitoring and restocking to solve the stockout issues at stores like La Paz 1, Hermosillo 2, and Pachuca 1.
 6. Review how stores like Campeche 2 and La Paz 1 are doing, along with other below-average locations, to find out what's wrong or how they can be improved.
