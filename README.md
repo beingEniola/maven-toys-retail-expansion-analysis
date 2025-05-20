@@ -39,6 +39,7 @@ CREATE TABLE sales(
 	CONSTRAINT fk_s_products FOREIGN KEY (Product_id) REFERENCES products(Product_id)
 );
 ```
+[Here](https://github.com/beingEniola/maven-toys-retail-expansion-analysis/blob/cef860c457220d219f4c4ddc6a88105483400e62/Maven%20toy%20schema.sql) is the full codes on how I created all the needed table.
 
 ### Data Import
 
@@ -67,6 +68,8 @@ ALTER TABLE products
 ALTER COLUMN product_price TYPE FLOAT USING product_price::FLOAT;
 
 ```
+Data Cleaning file can be found [here](https://github.com/beingEniola/maven-toys-retail-expansion-analysis/blob/cef860c457220d219f4c4ddc6a88105483400e62/maven%20toy%20data%20cleaning.sql)
+
 ### Analysis
 After Cleaning, I went on to answer 15 questions that will help in business expansion. This questions have been grouped to:
 
@@ -97,8 +100,8 @@ FROM yearly_rev;
 | 2022 | 7,482,498.08 | —            |
 | 2023 | 6,962,074.27 | -6.96%       |
 
-
-For a detailed walkthrough of the business questions, SQL solutions, insights, and recommendations from this project, check out the full write-up on [Medium](). Th
+full analysis please click [here]()
+For a detailed walkthrough of the business questions, SQL solutions, insights, and recommendations from this project, check out the full write-up on [Medium](https://medium.com/@dorcazkayode/maven-toys-retail-expansion-analysis-395a10fb8a61). 
 
 ## Insights 
 
@@ -111,9 +114,9 @@ For a detailed walkthrough of the business questions, SQL solutions, insights, a
 
 ## Recommendations
 
-1. Prioritize opening new stores in Downtown areas due to their strong and stable revenue performance despite the market decline..
-Model new store operations after top performers like Ciudad de Mexico 2, specifically analyzing and replicating their inventory mix, pricing, and customer engagement strategies.
-2. Increase inventory and promotions in December, especially for Mall and Urban stores, to leverage the annual sales peak.
-3. Ensure consistent stock availability for high-performing products such as Lego Bricks, Colorbuds, and Action Figures to maximize revenue and customer satisfaction.
-4. Improve inventory monitoring and restocking to solve the stockout issues at stores like La Paz 1, Hermosillo 2, and Pachuca 1.
-5. Review how stores like Campeche 2 and La Paz 1 are doing, along with other below-average locations, to find out what's wrong or how they can be improved.
+1. Prioritize opening new stores in Downtown areas due to their strong and stable revenue performance despite the market decline.
+2. Model new store operations after top performers like Ciudad de Mexico 2, specifically analyzing and replicating their inventory mix, pricing, and customer engagement strategies.
+3. Increase inventory and promotions in December, especially for Mall and Urban stores, to leverage the annual sales peak.
+4. Ensure consistent stock availability for high-performing products such as Lego Bricks, Colorbuds, and Action Figures to maximize revenue and customer satisfaction.
+5. Improve inventory monitoring and restocking to solve the stockout issues at stores like La Paz 1, Hermosillo 2, and Pachuca 1.
+6. Review how stores like Campeche 2 and La Paz 1 are doing, along with other below-average locations, to find out what's wrong or how they can be improved.
